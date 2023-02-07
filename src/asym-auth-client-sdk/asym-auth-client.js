@@ -106,7 +106,7 @@ export class AsymAuth {
   /**
    * This method accepts the server message and encrypts the message using the private key of the user.
    * @param {string} serverMessage
-   * @returns {string}
+   * @returns {string} Returns the encrypted message.
    */
   async encryptServerMessage(serverMessage) {
     if (!this.#currentUsername) {
