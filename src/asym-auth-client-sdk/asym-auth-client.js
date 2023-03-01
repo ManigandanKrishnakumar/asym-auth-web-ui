@@ -129,6 +129,7 @@ export class AsymAuth {
     try {
       const METHOD_BODY = {
         [HTTP_METHODS.POST]: (options) => {
+          options["headers"] = { "Content-Type": "application/json" };
           options["body"] = JSON.stringify({ ...body, domain: this.#domain });
         },
 
@@ -138,27 +139,15 @@ export class AsymAuth {
       };
 
       const options = {
-        method,
-        headers: {
-          "Content-Type": "application/json",
-          // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
+        method: method,
       };
 
       METHOD_BODY[method](options);
 
-      if (HTTP_METHODS.POST) {
-      } else {
-      }
-      const response = await fetch(url);
+      const response = await fetch(url, options);
 
-      const data = response.json();
-
-      if (data.success) {
-        return data;
-      } else {
-        throw new Error(data.errorMessage);
-      }
+      const data = await response.json();
+      return data;
     } catch (e) {
       console.error(e);
     }

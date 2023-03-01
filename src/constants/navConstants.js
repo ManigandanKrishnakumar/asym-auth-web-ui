@@ -9,4 +9,9 @@ export const PAGES = [
     url: "/protected-page",
     name: "Protected Content",
   },
+  {
+    id: "2",
+    url: "/test-functionality",
+    name: "Test Functionality",
+  },
 ];
