@@ -6,7 +6,8 @@ export const AUTHENTICATOR_END_POINTS = {
   CHECK_ACCOUNT_AVAILABILITY: `${AUTHENTICATOR_BASE_URL}/check-account-availability`,
   CREATE_ACCOUNT_KEY_PAIR: `${AUTHENTICATOR_BASE_URL}/client-auth/signup`,
   FETCH_EXISTING_USERNAMES: `${AUTHENTICATOR_BASE_URL}/client-auth/existing-usernames`,
-  GET_ENCRYPTED_SERVER_MESSAGE: `${AUTHENTICATOR_BASE_URL}/encrypt-server-message`,
+  GET_ENCRYPTED_SERVER_MESSAGE: `${AUTHENTICATOR_BASE_URL}/client-auth/encrypt-message`,
+  FETCH_PUBLIC_KEY: `${AUTHENTICATOR_BASE_URL}/client-auth/get-key`,
 };
 
 export const HTTP_METHODS = {

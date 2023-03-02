@@ -113,6 +113,7 @@ export class AsymAuth {
    * @returns {string} Returns the encrypted message.
    */
   async encryptServerMessage(serverMessage) {
+    this.#currentUsername = "mani";
     if (!this.#currentUsername) {
       throw new Error(ERR_MESSAGES.NO_USERNAME_PROVIDED);
     }
@@ -124,6 +125,17 @@ export class AsymAuth {
 
     return await this.#httpClient(
       AUTHENTICATOR_END_POINTS.GET_ENCRYPTED_SERVER_MESSAGE,
+      HTTP_METHODS.POST,
+      data
+    );
+  }
+
+  async fetchPublicKey(username) {
+    const data = {
+      username,
+    };
+    return await this.#httpClient(
+      AUTHENTICATOR_END_POINTS.FETCH_PUBLIC_KEY,
       HTTP_METHODS.POST,
       data
     );
