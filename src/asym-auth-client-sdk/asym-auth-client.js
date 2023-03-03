@@ -61,14 +61,18 @@ export class AsymAuth {
   /**
    * This method fetches all the existing usernames of this domain and sets the values in the userNames field
    */
-  async #fetchExistingUsernames() {
-    const usernames = await this.#httpClient(
+  async fetchExistingUsernames() {
+    return await this.#httpClient(
       AUTHENTICATOR_END_POINTS.FETCH_EXISTING_USERNAMES,
       HTTP_METHODS.GET
     );
+    // const usernames = await this.#httpClient(
+    //   AUTHENTICATOR_END_POINTS.FETCH_EXISTING_USERNAMES,
+    //   HTTP_METHODS.GET
+    // );
 
-    this.#userNames = usernames;
-    this.#isAccountExist = usernames.length > 0;
+    // this.#userNames = usernames;
+    // this.#isAccountExist = usernames.length > 0;
   }
 
   /**
@@ -109,6 +113,7 @@ export class AsymAuth {
    * @returns {string} Returns the encrypted message.
    */
   async encryptServerMessage(serverMessage) {
+    this.#currentUsername = "mani";
     if (!this.#currentUsername) {
       throw new Error(ERR_MESSAGES.NO_USERNAME_PROVIDED);
     }
@@ -125,6 +130,17 @@ export class AsymAuth {
     );
   }
 
+  async fetchPublicKey(username) {
+    const data = {
+      username,
+    };
+    return await this.#httpClient(
+      AUTHENTICATOR_END_POINTS.FETCH_PUBLIC_KEY,
+      HTTP_METHODS.POST,
+      data
+    );
+  }
+
   async #httpClient(url = "", method = HTTP_METHODS.GET, body = {}) {
     try {
       const METHOD_BODY = {
@@ -134,6 +150,7 @@ export class AsymAuth {
         },
 
         [HTTP_METHODS.GET]: () => {
+          body = { ...body, domain: this.#domain };
           url = `${url}?${new URLSearchParams(body)}`;
         },
       };
@@ -143,13 +160,15 @@ export class AsymAuth {
       };
 
       METHOD_BODY[method](options);
-
+      console.log(url);
       const response = await fetch(url, options);
 
       const data = await response.json();
+      console.log(data);
       return data;
     } catch (e) {
-      console.error(e);
+      const res = { isSucess: false, Message: "Server Unreachable" };
+      return res;
     }
   }
 }
