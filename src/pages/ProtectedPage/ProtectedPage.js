@@ -1,10 +1,8 @@
-import React from 'react';
+import React from "react";
+import { PageHeading } from "../../components";
 
-import './ProtectedPage.css';
+import "./ProtectedPage.css";
 
 export const ProtectedPage = () => {
-    return (
-        <h1>Protected Page</h1>
-    );
+  return <PageHeading heading="Protected Page" />;
 };
-

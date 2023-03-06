@@ -5,7 +5,7 @@ import "./ContentProvider.scss";
 
 export const ContentProvider = () => {
   return (
-    <div className="content-provider-container">
+    <div className="content-provider-container primary">
       <RouterOutlet />
     </div>
   );

@@ -8,7 +8,7 @@ export class AsymAuth {
   #domain;
   #isAccountExist;
   #currentUsername;
-  #userNames;
+  #userNames = ["mani"];
 
   constructor() {
     this.#init();
