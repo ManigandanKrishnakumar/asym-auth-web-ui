@@ -15,6 +15,14 @@ export const appReducer = (state, action) => {
         [STATES.CURRENT_USER]: action.payload,
       };
     }
+
+    case ACTION_TYPES.SET_LOADING_STATUS: {
+      return {
+        ...state,
+        [STATES.IS_LOADING]: action.payload,
+      };
+    }
+
     default: {
       return state;
     }
