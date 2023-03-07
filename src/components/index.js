@@ -8,3 +8,4 @@ export { Button } from "./Button/Button";
 export { AuthButtonGroup } from "./AuthButtonGroup/AuthButtonGroup";
 export { SwitchUserButton } from "./SwitchUserButton/SwitchUserButton";
 export { Loader } from "./Loader/Loader";
+export { UserPreview } from "./UserPreview/UserPreview";
