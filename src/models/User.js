@@ -4,5 +4,5 @@ export class User {
   username = "";
   email = "";
   dp = "";
-  userRole = USER_ROLES.DEFAULT;
+  userRole = USER_ROLES.ADMIN;
 }
