@@ -1,5 +1,5 @@
 import React from "react";
-import { AuthButtonGroup, PageHeading } from "../../components";
+import { AuthButtonGroup, PageHeading, UserPreview } from "../../components";
 
 import "./Home.scss";
 
