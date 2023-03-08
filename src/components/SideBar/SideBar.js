@@ -5,6 +5,7 @@ import { AppContext } from "../../state-management/app-context";
 import { ACTION_TYPES, STATES } from "../../state-management/constants";
 import { AppLogo } from "../AppLogo/AppLogo";
 import { NavItem } from "../NavItem/NavItem";
+import { UserPreview } from "../UserPreview/UserPreview";
 
 import "./SideBar.scss";
 
@@ -33,17 +34,20 @@ export const SideBar = () => {
 
   return (
     <div id="side-bar-container">
-      <AppLogo />
-      {PAGES.map((page) => {
-        return (
-          <NavItem
-            pageUrl={page.url}
-            label={page.name}
-            key={page.id}
-            hide={shouldHide(page.url)}
-          />
-        );
-      })}
+      <div>
+        <AppLogo />
+        {PAGES.map((page) => {
+          return (
+            <NavItem
+              pageUrl={page.url}
+              label={page.name}
+              key={page.id}
+              hide={shouldHide(page.url)}
+            />
+          );
+        })}
+      </div>
+      <UserPreview />
     </div>
   );
 };
