@@ -117,7 +117,7 @@ export class AsymAuth {
     if (!this.#currentUsername) {
       throw new Error(ERR_MESSAGES.NO_USERNAME_PROVIDED);
     }
-
+    
     const data = {
       serverMessage,
       username: this.#currentUsername,
@@ -160,11 +160,11 @@ export class AsymAuth {
       };
 
       METHOD_BODY[method](options);
-      console.log(url);
+      //console.log(url);
       const response = await fetch(url, options);
 
       const data = await response.json();
-      console.log(data);
+      //console.log(data);
       return data;
     } catch (e) {
       const res = { isSucess: false, Message: "Server Unreachable" };

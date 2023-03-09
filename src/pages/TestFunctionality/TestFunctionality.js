@@ -31,7 +31,7 @@ export const TestFunctionality = () => {
         className="ms-2"
         onClick={async () => {
           const response = await asymAuth.encryptServerMessage(
-            '{"test":"I Love my jobbbb so muchhhhh!!"}'
+            'mani:4165d1df60b1c0478ea33410241aeeea:1678231741575'
           );
           const ele = document.getElementById("result");
           ele.innerHTML = JSON.stringify(response);
