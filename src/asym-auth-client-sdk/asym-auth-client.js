@@ -167,7 +167,7 @@ export class AsymAuth {
       console.log(data);
       return data;
     } catch (e) {
-      const res = { isSucess: false, Message: "Server Unreachable" };
+      const res = { isSucess: false, message: "Server Unreachable" };
       return res;
     }
   }
