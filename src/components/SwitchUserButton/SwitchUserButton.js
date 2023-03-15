@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { CiLogout } from "react-icons/ci";
 
@@ -28,7 +29,7 @@ export const SwitchUserButton = ({ label, icon }) => {
 
 const UsersList = () => {
   const { data, dispatch } = useContext(AppContext);
-
+  const navigate = useNavigate();
   const switchUserClick = (username) => {
     const user = new User();
     user.username = username;
@@ -39,6 +40,7 @@ const UsersList = () => {
 
   const newUser = () => {
     console.log("Sign Up as new User");
+    navigate("/signup");
   };
 
   const signOut = () => {
