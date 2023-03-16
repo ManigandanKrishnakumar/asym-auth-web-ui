@@ -5,11 +5,11 @@ export const AccountCreationPage = ({
     username, 
     displayPicture, 
     emailID, 
-    personalInfo, 
+    displayName, 
     handleCreateAccount, 
     setDisplayPicture,
     setEmailID,
-    setPersonalInfo
+    setDisplayName
 }) => {
 
     return (
@@ -20,12 +20,21 @@ export const AccountCreationPage = ({
             <h4>Add Profile's Details</h4>
             <br />
             <form>
-                <label>Choose your Display Picture:</label>
+                <label>Choose your DP:</label>
                 <br />
                 <input 
                     type="file"
                     value = {displayPicture}
                     onChange = {(e) => setDisplayPicture(e.target.value)}
+                />
+                <br />
+                <br />
+                <label>Enter your Display Name:</label>
+                <br />
+                <input 
+                    type="text"
+                    value = {displayName}
+                    onChange = {(e) => setDisplayName(e.target.value)}
                 />
                 <br />
                 <br />
@@ -35,15 +44,6 @@ export const AccountCreationPage = ({
                     type="email"
                     value = {emailID}
                     onChange = {(e) => setEmailID(e.target.value)}
-                />
-                <br />
-                <br />
-                <label>Enter your Personal Info:</label>
-                <br />
-                <input 
-                    type="text"
-                    value = {personalInfo}
-                    onChange = {(e) => setPersonalInfo(e.target.value)}
                 />
                 <br />
                 <br />

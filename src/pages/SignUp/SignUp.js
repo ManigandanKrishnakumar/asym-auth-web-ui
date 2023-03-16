@@ -11,9 +11,9 @@ export const SignUp = () => {
     const [ username, setUsername ] = React.useState('');
     const [ unavailableUsername, setUnavailableUsername ] = React.useState('');
     const [ emptyUsername, setEmptyUsername ] = React.useState(false);
-    const [ displayPicture, setDisplayPicture ] = React.useState('');
-    const [ emailID, setEmailID ] = React.useState('');
-    const [ personalInfo, setPersonalInfo ] = React.useState('');
+    const [ dp, setDP ] = React.useState('');
+    const [ email, setEmail ] = React.useState('');
+    const [ displayName, setDisplayName ] = React.useState('');
     const [ nameAvailable, setNameAvailable ] = React.useState(false);
     const [ checkInitiated, setCheckInitiated ] = React.useState(false);
     const [ errStatus, setErrStatus ] = React.useState(false);
@@ -90,7 +90,7 @@ export const SignUp = () => {
         let unknownWinErr = false;
         dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: true });
         try{
-            const metaData = { displayPicture, emailID, personalInfo };
+            const metaData = { displayName, email, dp };
             //const user = new User();
             const response = await asymAuth.createAccountKeyPair(username);
             if(!response.isSuccess){
@@ -107,7 +107,7 @@ export const SignUp = () => {
                 throw response.message;
             }
             //console.log(JSON.stringify(response)); //{"isSucess":false,"Message":"Server Unreachable"}
-            const dataObj = { username, publicKey : JSON.stringify(response.payload), metaData };
+            const dataObj = { username, publicKey : response.payload, metaData };
             console.log(dataObj);
             //const resJson = await handleFetch(dataObj, 'http://localhost:6000/api/user/create-user');
             const resJson = await handleFetch(dataObj, API_ENDPOINTS.CREATE_USER);
@@ -141,13 +141,13 @@ export const SignUp = () => {
                 <div>
                     <AccountCreationPage 
                         username={username}  
-                        displayPicture={displayPicture} 
-                        emailID={emailID} 
-                        personalInfo={personalInfo} 
+                        displayPicture={dp} 
+                        emailID={email} 
+                        displayName={displayName} 
                         handleCreateAccount={handleCreateAccount}
-                        setDisplayPicture={setDisplayPicture}
-                        setEmailID={setEmailID}
-                        setPersonalInfo={setPersonalInfo}
+                        setDisplayPicture={setDP}
+                        setEmailID={setEmail}
+                        setDisplayName={setDisplayName}
                         />
                 </div>
             )}
