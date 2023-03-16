@@ -23,6 +23,13 @@ export const appReducer = (state, action) => {
       };
     }
 
+    case ACTION_TYPES.SET_ERROR_STATUS: {
+      return {
+        ...state,
+        [STATES.IS_ERROR]: action.payload,
+      };
+    }
+
     default: {
       return state;
     }

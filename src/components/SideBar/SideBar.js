@@ -20,7 +20,7 @@ export const SideBar = () => {
 
       [URLS.adminDashboard]: () => {
         const user = data[STATES.CURRENT_USER];
-        return user.userRole !== USER_ROLES.ADMIN && data[STATES.IS_LOGGED_IN];
+        return (user.userRole !== USER_ROLES.ADMIN) && data[STATES.IS_LOGGED_IN];
       },
       default: false,
     };

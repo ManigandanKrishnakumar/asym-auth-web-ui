@@ -8,7 +8,7 @@ export class AsymAuth {
   #domain;
   #isAccountExist;
   #currentUsername;
-  #userNames = ["mani"];
+  #userNames = ["mani", "sairam", "abhijit"];
 
   constructor() {
     this.#init();
@@ -160,11 +160,9 @@ export class AsymAuth {
       };
 
       METHOD_BODY[method](options);
-      console.log(url);
       const response = await fetch(url, options);
 
       const data = await response.json();
-      console.log(data);
       return data;
     } catch (e) {
       const res = { isSucess: false, Message: "Server Unreachable" };

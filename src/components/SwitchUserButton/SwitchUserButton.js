@@ -1,13 +1,16 @@
 import React, { useContext, useState } from "react";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { CiLogout } from "react-icons/ci";
-
+import useAuthentication from '../../custom-hooks/SignIn';
+import { SignIn, Retry } from "./SignIn";
+import { deleteToken } from "../../services/SignIn"; 
 import "./SwitchUserButton.scss";
 
 import { AiFillCaretDown } from "react-icons/ai";
 import { AppContext } from "../../state-management/app-context";
 import { ACTION_TYPES, STATES } from "../../state-management/constants";
 import { User } from "../../models/User";
+
 
 export const SwitchUserButton = ({ label, icon }) => {
   const [clicked, setClicked] = useState(false);
@@ -28,13 +31,29 @@ export const SwitchUserButton = ({ label, icon }) => {
 
 const UsersList = () => {
   const { data, dispatch } = useContext(AppContext);
+  const [authenticate] = useAuthentication();
 
-  const switchUserClick = (username) => {
+  const switchUserClick = async (username) => {
+    dispatch({ type: ACTION_TYPES.SET_ERROR_STATUS, payload: null});
+    dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: true });
     const user = new User();
     user.username = username;
-    dispatch({ type: ACTION_TYPES.SET_LOGIN_STATUS, payload: true });
-    dispatch({ type: ACTION_TYPES.SET_CURRENT_USER, payload: user });
-    console.log("Switch User : ", username);
+
+    try {
+    const userInfo = await authenticate(user.username);
+    dispatch({ type: ACTION_TYPES.SET_ERROR_STATUS, payload: null});
+    SignIn(dispatch,userInfo);
+    
+    }catch(error){
+      Retry(dispatch, () => {
+        Promise.resolve(authenticate(user.username)).then(userInfo => {
+          SignIn(dispatch, userInfo);
+        }).catch(error => {
+          //console.log(error);
+        });
+      });
+    }
+  
   };
 
   const newUser = () => {
@@ -42,6 +61,7 @@ const UsersList = () => {
   };
 
   const signOut = () => {
+    deleteToken();
     dispatch({ type: ACTION_TYPES.SET_LOGIN_STATUS, payload: false });
     dispatch({ type: ACTION_TYPES.SET_CURRENT_USER, payload: new User() });
     console.log("Sign Out");
