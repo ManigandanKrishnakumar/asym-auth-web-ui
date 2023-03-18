@@ -10,7 +10,7 @@ export const TestFunctionality = () => {
       <h1>Functionality Page</h1>
       <button
         onClick={async () => {
-          const response = await asymAuth.createAccountKeyPair("mani");
+          const response = await asymAuth.createAccountKeyPair("john");
           const ele = document.getElementById("result");
           ele.innerHTML = JSON.stringify(response);
         }}

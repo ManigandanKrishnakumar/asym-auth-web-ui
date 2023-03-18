@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { CiLogout } from "react-icons/ci";
 import useAuthentication from '../../custom-hooks/SignIn';
@@ -31,11 +32,16 @@ export const SwitchUserButton = ({ label, icon }) => {
 
 const UsersList = () => {
   const { data, dispatch } = useContext(AppContext);
+<<<<<<< HEAD
   const [authenticate] = useAuthentication();
 
   const switchUserClick = async (username) => {
     dispatch({ type: ACTION_TYPES.SET_ERROR_STATUS, payload: null});
     dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: true });
+=======
+  const navigate = useNavigate();
+  const switchUserClick = (username) => {
+>>>>>>> main
     const user = new User();
     user.username = username;
 
@@ -58,6 +64,7 @@ const UsersList = () => {
 
   const newUser = () => {
     console.log("Sign Up as new User");
+    navigate("/signup");
   };
 
   const signOut = () => {
