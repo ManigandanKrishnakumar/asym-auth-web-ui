@@ -8,7 +8,7 @@ export class AsymAuth {
   #domain;
   #isAccountExist;
   #currentUsername;
-  #userNames = ["mani", "sairam", "abhijit"];
+  #userNames = ["mani", "Sairam", "abhijit"];
 
   constructor() {
     this.#init();
@@ -22,6 +22,7 @@ export class AsymAuth {
     // this.#isAccountExist = this.getIsAccountAvailable();
     // this.#userNames = this.#fetchExistingUsernames();
   }
+  //uncomment the third line
 
   /**
    * This method is responsible for setting the selected username by the user

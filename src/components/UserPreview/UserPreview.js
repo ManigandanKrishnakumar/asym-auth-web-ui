@@ -5,17 +5,20 @@ import { deleteToken } from "../../services/SignIn";
 import { AppContext } from "../../state-management/app-context";
 import { ACTION_TYPES, STATES } from "../../state-management/constants";
 import { UserDisplayPicture } from "../UserDisplayPicture/UserDisplayPicture";
+import { useNavigate } from 'react-router-dom';
 
 import "./UserPreview.scss";
 
 export const UserPreview = () => {
   const { data, dispatch } = useContext(AppContext);
+  const navigate = useNavigate();
   const user = data[STATES.CURRENT_USER];
 
   const onLogout = () => {
     deleteToken();
     dispatch({ type: ACTION_TYPES.SET_LOGIN_STATUS, payload: false });
     dispatch({ type: ACTION_TYPES.SET_CURRENT_USER, payload: new User() });
+    navigate('/');
     console.log("Log Out");
   };
 

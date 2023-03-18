@@ -69,7 +69,6 @@ export const deleteToken = async () => {
       throw new Error(`Logout failed. Server responded with ${result.status}`);
     }
     const data = await result.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.log(error);

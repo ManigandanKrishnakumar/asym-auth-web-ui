@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { useNavigate } from 'react-router-dom';
 import "./Error.scss";
 import { AppContext } from "../../state-management/app-context";
 import { ACTION_TYPES } from "../../state-management/constants";
