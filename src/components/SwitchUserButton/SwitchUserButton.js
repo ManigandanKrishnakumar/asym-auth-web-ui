@@ -15,6 +15,7 @@ import { User } from "../../models/User";
 
 export const SwitchUserButton = ({ label, icon }) => {
   const [clicked, setClicked] = useState(false);
+
   return (
     <div
       className="switch-user-button-container action"
@@ -32,26 +33,23 @@ export const SwitchUserButton = ({ label, icon }) => {
 
 const UsersList = () => {
   const { data, dispatch } = useContext(AppContext);
-<<<<<<< HEAD
   const [authenticate] = useAuthentication();
+  const navigate = useNavigate();
 
   const switchUserClick = async (username) => {
+    data[STATES.ASYM_AUTH].setCurrentUsername(username);
     dispatch({ type: ACTION_TYPES.SET_ERROR_STATUS, payload: null});
     dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: true });
-=======
-  const navigate = useNavigate();
-  const switchUserClick = (username) => {
->>>>>>> main
     const user = new User();
     user.username = username;
 
     try {
-    const userInfo = await authenticate(user.username);
+    const userInfo = await authenticate(user.username, data[STATES.ASYM_AUTH]);
     dispatch({ type: ACTION_TYPES.SET_ERROR_STATUS, payload: null});
     SignIn(dispatch,userInfo);
     
     }catch(error){
-      Retry(dispatch, () => {
+      Retry(dispatch, error.message,  () => {
         Promise.resolve(authenticate(user.username)).then(userInfo => {
           SignIn(dispatch, userInfo);
         }).catch(error => {
@@ -73,6 +71,7 @@ const UsersList = () => {
     dispatch({ type: ACTION_TYPES.SET_CURRENT_USER, payload: new User() });
     console.log("Sign Out");
   };
+  
   return (
     <div className="users-list secondary">
       <div className="username">
@@ -82,7 +81,7 @@ const UsersList = () => {
       </div>
       {data[STATES.ASYM_AUTH].getExistingUsernames().map((username, index) => {
         return (
-          <div key={index.toString()} className="username ">
+          <div key={index.toString()} className="username">
             <button
               className="secondary"
               onClick={() => {

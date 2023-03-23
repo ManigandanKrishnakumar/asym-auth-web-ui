@@ -8,19 +8,26 @@ export class AsymAuth {
   #domain;
   #isAccountExist;
   #currentUsername;
-  #userNames = ["mani", "Sairam", "abhijit"];
+  #userNames = [];
+  error;
 
   constructor() {
     this.#init();
+
   }
 
   /**
    * This method initializes the class with necessary data
    */
-  #init() {
+  async #init() {
     this.#domain = this.#getDomainName();
     // this.#isAccountExist = this.getIsAccountAvailable();
-    // this.#userNames = this.#fetchExistingUsernames();
+    try {
+    this.#userNames = await this.fetchExistingUsernames();
+    } catch(error){
+      console.log(error);
+      this.error = "Check Windows App";
+    }
   }
   //uncomment the third line
 
@@ -63,10 +70,12 @@ export class AsymAuth {
    * This method fetches all the existing usernames of this domain and sets the values in the userNames field
    */
   async fetchExistingUsernames() {
-    return await this.#httpClient(
+    const result = await this.#httpClient(
       AUTHENTICATOR_END_POINTS.FETCH_EXISTING_USERNAMES,
       HTTP_METHODS.GET
     );
+    this.#userNames = result.payload.usernames;
+    return (result.payload.usernames);
     // const usernames = await this.#httpClient(
     //   AUTHENTICATOR_END_POINTS.FETCH_EXISTING_USERNAMES,
     //   HTTP_METHODS.GET
@@ -114,7 +123,6 @@ export class AsymAuth {
    * @returns {string} Returns the encrypted message.
    */
   async encryptServerMessage(serverMessage) {
-    this.#currentUsername = "mani";
     if (!this.#currentUsername) {
       throw new Error(ERR_MESSAGES.NO_USERNAME_PROVIDED);
     }

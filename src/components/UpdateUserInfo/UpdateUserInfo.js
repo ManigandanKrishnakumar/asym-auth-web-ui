@@ -8,6 +8,7 @@ import { ACTION_TYPES} from "../../state-management/constants";
 
 const UserInfo = () => {
   const {dispatch, data} = useContext(AppContext);
+  
   const user = data[STATES.CURRENT_USER];
     const [currentUser, setCurrentUser] = useState({
         displayName: user.displayName || " ",

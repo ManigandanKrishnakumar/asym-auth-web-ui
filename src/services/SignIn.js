@@ -1,8 +1,4 @@
 import {BACK_END_POINTS} from '../apiconstants/apiConstants';
-import { AsymAuth } from '../asym-auth-client-sdk/asym-auth-client';
-
-const asymAuth = new AsymAuth();
-
 
 export const getChallenge = async (username) => {
   const body = {username};
@@ -15,20 +11,21 @@ export const getChallenge = async (username) => {
       body: JSON.stringify(body)
     });
     if (!response.ok) {
-      throw new Error(`User not present. Server responded with ${response.status}`);
+      const data = await response.json();
+      throw new Error(data.message);
     }
     const data = await response.json();
     const signature = data.payload.signature;
     const challenge = data.payload.challenge;
     return {challenge, signature};
   } catch (error) {
-    throw new Error('User not present')
+    throw new Error(error.message)
   }
 };
 
-export const getEncryptedChallenge = async (challenge) => {
+export const getEncryptedChallenge = async (challenge, data) => {
   try {
-    const result = await asymAuth.encryptServerMessage(challenge);
+    const result = await data.encryptServerMessage(challenge);
     const encryptedChallenge = result.payload.cipherText;
     return encryptedChallenge;
   } catch (error) {
@@ -49,13 +46,14 @@ export const getToken = async (response, signature, challenge) => {
       credentials: 'include'
     });
     if (!result.ok) {
-      throw new Error(`Authentication failed. Server responded with ${result.status}`);
+      const data = await result.json();
+      throw new Error(data.message);
+      //throw new Error(`Authentication failed. Server responded with ${result.status}`);
     }
     const data = await result.json();
     return data;
   } catch (error) {
-    console.log(error);
-    throw new Error('Authentication failed')
+    throw new Error(error.message)
   }
 };
 
@@ -71,7 +69,6 @@ export const deleteToken = async () => {
     const data = await result.json();
     return data;
   } catch (error) {
-    console.log(error);
-    throw new Error('logout failed')
+    throw new Error('Logout failed')
   }
 };

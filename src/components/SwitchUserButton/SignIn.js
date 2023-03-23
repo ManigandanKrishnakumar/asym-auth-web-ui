@@ -14,9 +14,9 @@ export const SignIn = (dispatch, userInfo) => {
   };
     
 
-export const Retry = (dispatch, callback) => {
+export const Retry = (dispatch, errormessage, callback) => {
   dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: false});
   dispatch({ type: ACTION_TYPES.SET_LOGIN_STATUS, payload: false });
-  dispatch({ type: ACTION_TYPES.SET_ERROR_STATUS, payload: new AppError("Authentication failed.", callback) });
+  dispatch({ type: ACTION_TYPES.SET_ERROR_STATUS, payload: new AppError(errormessage, callback) });
 };
 

@@ -19,7 +19,6 @@ export const UserPreview = () => {
     dispatch({ type: ACTION_TYPES.SET_LOGIN_STATUS, payload: false });
     dispatch({ type: ACTION_TYPES.SET_CURRENT_USER, payload: new User() });
     navigate('/');
-    console.log("Log Out");
   };
 
   if (!data[STATES.IS_LOGGED_IN]) {

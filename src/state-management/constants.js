@@ -11,7 +11,7 @@ export const STATES = {
 
 export const INITIAL_STATE = {
   [STATES.IS_LOGGED_IN]: false,
-  [STATES.ASYM_AUTH]: new AsymAuth(),
+  [STATES.ASYM_AUTH]: new AsymAuth(), 
   [STATES.CURRENT_USER]: new User(),
   [STATES.IS_LOADING]: false,
   [STATES.IS_ERROR]: null,
