@@ -8,7 +8,7 @@ export const Loader = () => {
   return (
     <div className="loader-container">
       <div className="loader-content primary">
-        <GiHouseKeys id="app-icon" />
+      <GiHouseKeys id="app-icon" />
       </div>
     </div>
   );

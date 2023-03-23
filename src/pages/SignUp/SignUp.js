@@ -41,7 +41,7 @@ export const SignUp = () => {
                 body: JSON.stringify(dataObj)
             });
             const resJson = await res.json();
-            console.log(resJson);
+            //console.log(resJson);
             return resJson;
         }catch(err){
             console.log(err);
@@ -74,7 +74,7 @@ export const SignUp = () => {
                     throw "Error! Check Availalbility failed!"
                 }
             }catch(err){
-                console.log(err);
+                //console.log(err);
                 setErrStatus(true);
             }
             dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: false });
@@ -108,7 +108,7 @@ export const SignUp = () => {
             }
             //console.log(JSON.stringify(response)); //{"isSucess":false,"Message":"Server Unreachable"}
             const dataObj = { username, publicKey : response.payload, metaData };
-            console.log(dataObj);
+            //console.log(dataObj);
             //const resJson = await handleFetch(dataObj, 'http://localhost:6000/api/user/create-user');
             const resJson = await handleFetch(dataObj, API_ENDPOINTS.CREATE_USER);
             if(resJson.isSuccess){

@@ -2,6 +2,7 @@ import { ACTION_TYPES, STATES } from "./constants";
 
 export const appReducer = (state, action) => {
   switch (action.type) {
+    
     case ACTION_TYPES.SET_LOGIN_STATUS: {
       return {
         ...state,
@@ -23,8 +24,16 @@ export const appReducer = (state, action) => {
       };
     }
 
+    case ACTION_TYPES.SET_ERROR_STATUS: {
+      return {
+        ...state,
+        [STATES.IS_ERROR]: action.payload,
+      };
+    }
+
     default: {
       return state;
     }
   }
 };
+

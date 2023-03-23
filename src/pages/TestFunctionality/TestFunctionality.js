@@ -10,7 +10,7 @@ export const TestFunctionality = () => {
       <h1>Functionality Page</h1>
       <button
         onClick={async () => {
-          const response = await asymAuth.createAccountKeyPair("john");
+          const response = await asymAuth.createAccountKeyPair("sam");
           const ele = document.getElementById("result");
           ele.innerHTML = JSON.stringify(response);
         }}
@@ -31,7 +31,7 @@ export const TestFunctionality = () => {
         className="ms-2"
         onClick={async () => {
           const response = await asymAuth.encryptServerMessage(
-            '{"test":"I Love my jobbbb so muchhhhh!!"}'
+            'sam:efadf6da025de49920bb6876231e211b:1679264274721'
           );
           const ele = document.getElementById("result");
           ele.innerHTML = JSON.stringify(response);
@@ -42,7 +42,7 @@ export const TestFunctionality = () => {
       <button
         className="ms-2"
         onClick={async () => {
-          const response = await asymAuth.fetchPublicKey("mani");
+          const response = await asymAuth.fetchPublicKey("");
           const ele = document.getElementById("result");
           ele.innerHTML = JSON.stringify(response);
         }}

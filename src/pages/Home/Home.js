@@ -1,10 +1,10 @@
 import React from "react";
-import { AuthButtonGroup, PageHeading, UserPreview } from "../../components";
+import { AuthButtonGroup, PageHeading} from "../../components";
 
 import "./Home.scss";
 
 export const Home = () => {
-  return (
+    return (
     <div id="home-page-container">
       <div className="header">
         <PageHeading heading="Home" />
