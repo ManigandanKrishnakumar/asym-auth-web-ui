@@ -31,7 +31,7 @@ export const TestFunctionality = () => {
         className="ms-2"
         onClick={async () => {
           const response = await asymAuth.encryptServerMessage(
-            'sam:efadf6da025de49920bb6876231e211b:1679264274721'
+            "sam:efadf6da025de49920bb6876231e211b:1679264274721"
           );
           const ele = document.getElementById("result");
           ele.innerHTML = JSON.stringify(response);
@@ -42,12 +42,22 @@ export const TestFunctionality = () => {
       <button
         className="ms-2"
         onClick={async () => {
-          const response = await asymAuth.fetchPublicKey("");
+          const response = await asymAuth.fetchPublicKey("sam");
           const ele = document.getElementById("result");
           ele.innerHTML = JSON.stringify(response);
         }}
       >
         Fetch Public Key
+      </button>
+      <button
+        className="ms-2"
+        onClick={async () => {
+          const response = await asymAuth.deleteUsername("sam");
+          const ele = document.getElementById("result");
+          ele.innerHTML = JSON.stringify(response);
+        }}
+      >
+        Delete Username
       </button>
       <div id="result"></div>
     </div>

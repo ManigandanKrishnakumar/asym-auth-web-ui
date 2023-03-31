@@ -8,6 +8,7 @@ export const AUTHENTICATOR_END_POINTS = {
   FETCH_EXISTING_USERNAMES: `${AUTHENTICATOR_BASE_URL}/client-auth/existing-usernames`,
   GET_ENCRYPTED_SERVER_MESSAGE: `${AUTHENTICATOR_BASE_URL}/client-auth/encrypt-message`,
   FETCH_PUBLIC_KEY: `${AUTHENTICATOR_BASE_URL}/client-auth/get-key`,
+  DELETE_USERNAME: `${AUTHENTICATOR_BASE_URL}/client-auth/delete-user`,
 };
 
 export const HTTP_METHODS = {
