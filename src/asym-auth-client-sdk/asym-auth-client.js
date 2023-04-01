@@ -13,7 +13,6 @@ export class AsymAuth {
 
   constructor() {
     this.#init();
-
   }
 
   /**
@@ -23,8 +22,8 @@ export class AsymAuth {
     this.#domain = this.#getDomainName();
     // this.#isAccountExist = this.getIsAccountAvailable();
     try {
-    this.#userNames = await this.fetchExistingUsernames();
-    } catch(error){
+      this.#userNames = await this.fetchExistingUsernames();
+    } catch (error) {
       console.log(error);
       this.error = "Check Windows App";
     }
@@ -75,7 +74,7 @@ export class AsymAuth {
       HTTP_METHODS.GET
     );
     this.#userNames = result.payload.usernames;
-    return (result.payload.usernames);
+    return result.payload.usernames;
     // const usernames = await this.#httpClient(
     //   AUTHENTICATOR_END_POINTS.FETCH_EXISTING_USERNAMES,
     //   HTTP_METHODS.GET
@@ -112,6 +111,26 @@ export class AsymAuth {
 
     return await this.#httpClient(
       AUTHENTICATOR_END_POINTS.CREATE_ACCOUNT_KEY_PAIR,
+      HTTP_METHODS.POST,
+      data
+    );
+  }
+
+  /**
+   * This method deletes the username under the calling domain on the Windows App.
+   * @param {string} username Unique username for the user account in this application
+   */
+  async deleteUsername(username) {
+    if (!username) {
+      throw new Error(ERR_MESSAGES.NO_USERNAME_PROVIDED);
+    }
+
+    const data = {
+      username,
+    };
+
+    return await this.#httpClient(
+      AUTHENTICATOR_END_POINTS.DELETE_USERNAME,
       HTTP_METHODS.POST,
       data
     );
