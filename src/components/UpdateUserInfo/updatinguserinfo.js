@@ -19,6 +19,6 @@ export const updatingUserInfo = (dispatch, data, userInfo) => {
   export const ErrorupdatingUserInfo = (dispatch) => {
     //const navigate = useNavigate();
     dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: false });
-    console.log('Error in updating user info. Try again');
+    //console.log('Error in updating user info. Try again');
   
     };

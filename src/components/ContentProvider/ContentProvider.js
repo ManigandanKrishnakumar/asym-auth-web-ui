@@ -12,7 +12,7 @@ export const ContentProvider = () => {
   return (
     <div className="content-provider-container primary">
       <RouterOutlet />
-      {data[STATES.IS_LOADING] && <Loader />}
+      {data[STATES.IS_LOADING] && <Loader/>}
       {data[STATES.IS_ERROR] && <Error error={data[STATES.IS_ERROR]} />}
     </div>
   );

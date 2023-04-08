@@ -4,11 +4,14 @@ import './UpdateUserInfo.scss'
 import { AppContext } from "../../state-management/app-context";
 import { STATES } from "../../state-management/constants";
 import { updatingUserInfo, ErrorupdatingUserInfo } from "./updatinguserinfo";
+import { DeleteInfo, ErrorDeleteInfo, DeletingInfo } from "./deleteuser";
 import { ACTION_TYPES} from "../../state-management/constants";
+import { useNavigate } from 'react-router-dom';
 
 const UserInfo = () => {
   const {dispatch, data} = useContext(AppContext);
-  
+  const navigate = useNavigate();
+
   const user = data[STATES.CURRENT_USER];
     const [currentUser, setCurrentUser] = useState({
         displayName: user.displayName || " ",
@@ -59,6 +62,26 @@ const handleChange = (event) => {
         ErrorupdatingUserInfo(dispatch);
     }
 }
+
+const handleDeleteSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+      dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: true });
+      const isSuccesful = await DeletingInfo(user.username, data[STATES.ASYM_AUTH]);
+      navigate("/");
+      DeleteInfo(dispatch, isSuccesful);
+  }catch(error){
+      ErrorDeleteInfo(dispatch, error.message,  () => {
+        Promise.resolve(DeletingInfo(user.username, data[STATES.ASYM_AUTH])).then(userInfo => {
+          navigate("/");
+          DeleteInfo(dispatch, 'isSuccesful');
+        }).catch(error => {
+          //console.log(error);
+        });
+      });
+  }
+}
   return (
     <div className="container">
     <form>
@@ -78,7 +101,10 @@ const handleChange = (event) => {
     <input type="file" id="displaypicture" name="file" onChange={handleChange}/>
   </div>
   </form>
+  <div className="button-group">
   <button type="submit" id ="update" onClick={handleSubmit}>Save Changes</button>
+  <button type="submit" id ="update" onClick={handleDeleteSubmit}>Delete User</button>
+  </div>
 </div>
     );
 };

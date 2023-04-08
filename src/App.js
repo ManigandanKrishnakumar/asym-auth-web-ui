@@ -5,10 +5,12 @@ import { AppContextProvider} from "./state-management/app-context";
 import {STATES } from "./state-management/constants";
 import { appReducer} from "./state-management/app-reducer";
 import { INITIAL_STATE } from "./state-management/constants";
+import { useNavigate } from 'react-router-dom';
 
 function App() {
   const [user, setUser] = useState(null);
   const [data, dispatch] = useReducer(appReducer, INITIAL_STATE);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function Checklogin() {
@@ -26,6 +28,8 @@ function App() {
         setUser(userInfo);        
         
       } catch (error) {
+        data[STATES.IS_LOGGED_IN] = false;
+        navigate("/");
         //console.error(error);
       }
     }

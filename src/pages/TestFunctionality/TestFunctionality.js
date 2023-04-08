@@ -52,7 +52,7 @@ export const TestFunctionality = () => {
       <button
         className="ms-2"
         onClick={async () => {
-          const response = await asymAuth.deleteUsername("sam");
+          const response = await asymAuth.deleteUsername("nanda");
           const ele = document.getElementById("result");
           ele.innerHTML = JSON.stringify(response);
         }}
