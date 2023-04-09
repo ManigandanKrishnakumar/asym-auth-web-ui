@@ -49,7 +49,7 @@ const UsersList = () => {
     SignIn(dispatch,userInfo);
     
     }catch(error){
-      Retry(dispatch, error.message,  () => {
+      Retry(dispatch, error.message, user.username,  () => {
         Promise.resolve(authenticate(user.username)).then(userInfo => {
           SignIn(dispatch, userInfo);
         }).catch(error => {
