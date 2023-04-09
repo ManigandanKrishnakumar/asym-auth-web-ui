@@ -49,7 +49,7 @@ const UsersList = () => {
     SignIn(dispatch,userInfo);
     
     }catch(error){
-      Retry(dispatch, error.message,  () => {
+      Retry(dispatch, error.message, user.username,  () => {
         Promise.resolve(authenticate(user.username)).then(userInfo => {
           SignIn(dispatch, userInfo);
         }).catch(error => {
@@ -61,7 +61,7 @@ const UsersList = () => {
   };
 
   const newUser = () => {
-    console.log("Sign Up as new User");
+    //console.log("Sign Up as new User");
     navigate("/signup");
   };
 
@@ -69,7 +69,7 @@ const UsersList = () => {
     deleteToken();
     dispatch({ type: ACTION_TYPES.SET_LOGIN_STATUS, payload: false });
     dispatch({ type: ACTION_TYPES.SET_CURRENT_USER, payload: new User() });
-    console.log("Sign Out");
+    //console.log("Sign Out");
   };
   
   return (
