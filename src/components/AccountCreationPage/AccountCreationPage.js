@@ -3,13 +3,12 @@ import "./AccountCreationPage.scss"
 
 export const AccountCreationPage = ({ 
     username, 
-    displayPicture, 
     emailID, 
     displayName, 
     handleCreateAccount, 
-    setDisplayPicture,
-    setEmailID,
-    setDisplayName
+    handleFileChosen,
+    setDisplayName,
+    handleEmailChange
 }) => {
 
     return (
@@ -24,8 +23,7 @@ export const AccountCreationPage = ({
                 <br />
                 <input 
                     type="file"
-                    value = {displayPicture}
-                    onChange = {(e) => setDisplayPicture(e.target.value)}
+                    onChange = {handleFileChosen}
                 />
                 <br />
                 <br />
@@ -43,7 +41,7 @@ export const AccountCreationPage = ({
                 <input 
                     type="email"
                     value = {emailID}
-                    onChange = {(e) => setEmailID(e.target.value)}
+                    onChange = {(e) => handleEmailChange(e.target.value)}
                 />
                 <br />
                 <br />

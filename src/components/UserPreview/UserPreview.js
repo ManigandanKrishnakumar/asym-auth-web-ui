@@ -29,7 +29,7 @@ export const UserPreview = () => {
     <div className="user-preview-container">
       <UserDisplayPicture source={user.dp} />
       <p className="display-name">{user.displayName}</p>
-      <p className="role">{`${user.userRole} user`}</p>
+      <p className="role">{`${user.userRole}`}</p>
       <CiLogout id="logout-button" onClick={onLogout} />
     </div>
   );
