@@ -10,7 +10,7 @@ export const BACK_END_POINTS = {
     },
     USER_INFO: {
       EDIT: `${BackEndServer_BASE_URL}/api/user/update-user`,  
-      //DELETE: `${BackEndServer_BASE_URL}/api/user/delete-user`,  
+      DELETE: `${BackEndServer_BASE_URL}/api/user/delete-user`,  
     },
   };
   

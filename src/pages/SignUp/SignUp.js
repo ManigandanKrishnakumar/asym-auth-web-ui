@@ -71,7 +71,7 @@ export const SignUp = () => {
             //console.log(resJson);
             return resJson;
         }catch(err){
-            console.log(err);
+            //console.log(err);
             setErrStatus(true);
         }
     }

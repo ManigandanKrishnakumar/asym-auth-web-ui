@@ -10,6 +10,10 @@ export const getChallenge = async (username) => {
       },
       body: JSON.stringify(body)
     });
+    if (response.status === 401)
+    {
+      window.location.reload();
+    }
     if (!response.ok) {
       const data = await response.json();
       throw new Error(data.message);
@@ -45,6 +49,10 @@ export const getToken = async (response, signature, challenge) => {
       body: JSON.stringify(body),
       credentials: 'include'
     });
+    if (result.status === 401)
+    {
+      window.location.reload();
+    }
     if (!result.ok) {
       const data = await result.json();
       throw new Error(data.message);
@@ -63,6 +71,10 @@ export const deleteToken = async () => {
       method: 'GET',
       credentials: 'include'
     });
+    if (result.status === 401)
+    {
+      window.location.reload();
+    }
     if (!result.ok) {
       throw new Error(`Logout failed. Server responded with ${result.status}`);
     }
