@@ -7,9 +7,6 @@ export const REGEX = {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && lengthValidation(email);
   };
   
-  export const phoneNumberValidation = (phoneNumber) => {
-    return phoneNumber.length === 10;
-  };
   export const nameValidation = (name) => {
     return /^[a-zA-Z ]+$/.test(name) && lengthValidation(name);
   };

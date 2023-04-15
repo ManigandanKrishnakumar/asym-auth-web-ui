@@ -15,6 +15,9 @@ import { User } from "../../models/User";
 
 export const SwitchUserButton = ({ label, icon }) => {
   const [clicked, setClicked] = useState(false);
+  const { data, dispatch } = useContext(AppContext);
+  const asymAuth = data[STATES.ASYM_AUTH];
+  asymAuth.fetchExistingUsernames();
 
   return (
     <div
@@ -35,6 +38,7 @@ const UsersList = () => {
   const { data, dispatch } = useContext(AppContext);
   const [authenticate] = useAuthentication();
   const navigate = useNavigate();
+
 
   const switchUserClick = async (username) => {
     data[STATES.ASYM_AUTH].setCurrentUsername(username);

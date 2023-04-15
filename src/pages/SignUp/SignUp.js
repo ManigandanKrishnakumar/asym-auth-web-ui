@@ -125,7 +125,7 @@ export const SignUp = () => {
             dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: true });
             try{
                 const metaData = { displayName, email, dp };
-                console.log("The meta data is ", metaData)
+                //console.log("The meta data is ", metaData)
                 //const user = new User();
                 const response = await asymAuth.createAccountKeyPair(username);
                 if(!response.isSuccess){
