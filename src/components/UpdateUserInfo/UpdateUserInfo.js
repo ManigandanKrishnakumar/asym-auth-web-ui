@@ -7,6 +7,7 @@ import { updatingUserInfo, ErrorupdatingUserInfo } from "./updatinguserinfo";
 import { DeleteInfo, ErrorDeleteInfo, DeletingInfo } from "./deleteuser";
 import { ACTION_TYPES} from "../../state-management/constants";
 import { useNavigate } from 'react-router-dom';
+import { emailValidation, nameValidation } from "../../services/InputValidation";
 
 const UserInfo = () => {
   const {dispatch, data} = useContext(AppContext);
@@ -19,9 +20,15 @@ const UserInfo = () => {
         dp: user.dp || " ",
       });
 
+      const [ checkInvalidEmail, setCheckInvalidEmail ] = useState(false);
+      const [checkInvalidUsername, setcheckInvalidUsername] = useState(false);
+      const [checkInvalidDP, setcheckInvalidDP] = useState(false);
+
 const handleChange = (event) => {
   const { id, value} = event.target;
-
+  setCheckInvalidEmail(false);
+  setcheckInvalidUsername(false);
+  setcheckInvalidDP(false);
   if (id === "displaypicture") {
     const selectedfile = event.target.files;
     if (selectedfile.length > 0) {
@@ -37,7 +44,8 @@ const handleChange = (event) => {
       fileReader.readAsDataURL(imageFile);
 
   }
-} else {
+} 
+else {
     setCurrentUser({
       ...currentUser,
       [id]: value,
@@ -54,12 +62,34 @@ const handleChange = (event) => {
     e.preventDefault();
 
     try {
+      
+        if (nameValidation(currentUser.displayName)) 
+          {
+      }
+        else {
+          throw new Error('Enter a proper displayname')
+        }
+      
+        if(emailValidation(currentUser.email))
+        {
+      }
+      else 
+      {
+        throw new Error('Enter a proper email')
+      }
+
+
         dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: true });
         const metadata = {displayName: currentUser.displayName, email: currentUser.email, dp: currentUser.dp};
         const userInfo = await updateUserInfo(user.username, metadata);
         updatingUserInfo(dispatch, data[STATES.CURRENT_USER], userInfo);
     }catch(error){
-        ErrorupdatingUserInfo(dispatch);
+          if (error.message === 'Enter a proper email')
+            setCheckInvalidEmail(true);
+          else if(error.message ==='Enter a proper displayname')
+            setcheckInvalidUsername(true);
+          else         
+            ErrorupdatingUserInfo(dispatch);
     }
 }
 
@@ -105,6 +135,8 @@ const handleDeleteSubmit = async (e) => {
   <button type="submit" id ="update" onClick={handleSubmit}>Save Changes</button>
   <button type="submit" id ="update" onClick={handleDeleteSubmit}>Delete User</button>
   </div>
+  { checkInvalidUsername && <div><br /><p>Username is invalid</p></div> }
+  { checkInvalidEmail && <div><br /><p><b>{currentUser.email}</b> is an invalid Email ID! Please enter a valid one.</p></div> }
 </div>
     );
 };
